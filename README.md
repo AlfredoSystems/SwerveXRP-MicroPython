@@ -5,12 +5,15 @@ This is code for my [XRP Differential Swerve Drive Robot](https://www.printables
 
 IMPORTANT: This code is a WIP. use at your own peril!
 
+This code is incomplete. Right now each module can rotate and translate very well (what I consider the hard part) but all the modules rotate and translate the same, so the robot itself still can't rotate! I will find a few hours sometime eventually to figure out the final bit of fun vector math.
+
 ## Notes ##
 
 - Both XRPs run the same code, except I give them both a different Bluetooth name. You can connect to either of them to drive the robot.
 - The XRPs need a wired serial connection to communicate with each other. I used 3 Dupont female-female wires to connect D16->D17, D17->D16, and GND->GND
 - The zero angle for each module is determined when the robot is turned on, all modules must be manually aligned at that time.
 	- even if all the wheels are pointed the same way, some of them might be 180 degrees out of alignment. look for the small bevel gears for alignment.
+- Huge props to FTC team 9048, this repo is not much more than a python version of their [java differential swerve drive code](https://github.com/ameliorater/ftc-diff-swerve?tab=readme-ov-file)
 
 ## SwerveXRP Setup Guide ##
 1) Your robot needs [Pestolink-MicroPython](https://github.com/AlfredoSystems/PestoLink-MicroPython). Follow the first two steps in that repo. (doesn't hurt to go through all the steps just to get familiar with Pestolink).
