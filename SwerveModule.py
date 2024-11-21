@@ -4,7 +4,6 @@ import math
 from Vector2D import Vector2D
 from XRPLib.defaults import *
 
-
 class Module:
     TICKS_PER_MODULE_REV = 12 * (48 / 1) * (74 / 36) * 2  # ticks per MODULE revolution
     DEGREES_PER_TICK = 360 / TICKS_PER_MODULE_REV
@@ -22,12 +21,15 @@ class Module:
         self.motor_AU = motor_AU
         self.motor_AL = motor_AL
         self.encoder_sign = encoder_sign
+        self.move_component = 0
+        self.pivot_component = 0
 
     def get_azimuth(self):
-        return (self.motor_AU.get_position_counts() + self.motor_AL.get_position_counts()) * self.DEGREES_PER_TICK * self.encoder_sign
+        azimuth = (self.motor_AU.get_position_counts() + self.motor_AL.get_position_counts()) * self.DEGREES_PER_TICK * self.encoder_sign
+        return azimuth
 
-    def get_pivot_component(self, target_vector, current_angle, move_component):
-        target_angle = target_vector.to_deg()
+    def get_pivot_component(self, target_angle):
+        current_angle = self.get_azimuth()
         
         angle_diff = abs(current_angle - target_angle) % 360
         if angle_diff > 180:
@@ -52,8 +54,7 @@ class Module:
             direction = (1 if delta >= 0 else -1) * angle_diff / self.ANGLE_OF_MAX_MODULE_ROTATION_POWER * self.ROT_ADVANTAGE
         
         
-        
-        #print("{:.2f} {:.2f} {:.2f} {:.2f} {:.2f}".format(target_angle, current_angle, fixed_angle, direction, move_component))
+        #print("{:.2f} {:.2f} {:.2f} {:.2f}".format(target_angle, current_angle, fixed_angle, direction))
         
         return direction
 
@@ -84,15 +85,15 @@ class Module:
         if (self.moduleReversed):
             target_vector = target_vector * -1
 
-        move_component = abs(target_vector)
+        self.move_component = abs(target_vector)
         if self.moduleReversed:
-            move_component *= -1
-
-        if abs(target_vector) != 0:
-            pivot_component = self.get_pivot_component(target_vector, self.get_azimuth(), move_component)
+            self.move_component *= -1
+        
+        target_angle = target_vector.to_deg()
+        if abs(target_vector) >= 0.05:
+            self.pivot_component = self.get_pivot_component(target_angle)
         else:
-            pivot_component = self.get_pivot_component(Vector2D(0.1, -0.1), self.get_azimuth(), move_component)
-
-        self.set_motors(move_component, pivot_component)
+            self.pivot_component = self.get_pivot_component(self.get_azimuth())
 
 
+        self.set_motors(self.move_component, self.pivot_component)

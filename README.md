@@ -5,7 +5,7 @@ This is code for my [XRP Differential Swerve Drive Robot](https://www.printables
 
 IMPORTANT: This code is a WIP. use at your own peril!
 
-This code is incomplete. Right now each module can rotate and translate very well (what I consider the hard part) but all the modules rotate and translate the same, so the robot itself still can't rotate! I will find a few hours sometime eventually to figure out the final bit of fun vector math.
+Right now each module can rotate and translate very well (what I consider the hard part) but all the modules rotate and translate the same, so the robot itself still can't rotate! I will find a few hours sometime eventually to figure out the final bit of fun vector math.
 
 ## Notes ##
 
@@ -23,13 +23,13 @@ This code is incomplete. Right now each module can rotate and translate very wel
 	- In the XRP Code editor, go to `file > Upload to XRP` and select `Vector2D.py` from the repo you just downloaded
 	- Save the file at the top level, so that `FINAL PATH: /Vector2D.py`
 
-1) Upload `swerveModule.py` to your XRP robot
-	- In the XRP Code editor, go to `file > Upload to XRP` and select `swerveModule.py` from the repo you just downloaded
-	- Save the file at the top level, so that `FINAL PATH: /swerveModule.py`
+1) Upload `swervemodule.py` to your XRP robot
+	- In the XRP Code editor, go to `file > Upload to XRP` and select `swervemodule.py` from the repo you just downloaded
+	- Save the file at the top level, so that `FINAL PATH: /swervemodule.py`
 	
-1) Upload `swerveMain.py` to your XRP robot
-	- In the XRP Code editor, go to `file > Upload to XRP` and select `swerveMain.py` from the repo you just downloaded
-	- Save the file at the top level, so that `FINAL PATH: /swerveMain.py`
+1) Upload `swervemain.py` to your XRP robot
+	- In the XRP Code editor, go to `file > Upload to XRP` and select `swervemain.py` from the repo you just downloaded
+	- Save the file at the top level, so that `FINAL PATH: /swervemain.py`
 	- change the `robot_name` string to what you want the robot to be named for Bluetooth pairing
 	- Save the file again
 
